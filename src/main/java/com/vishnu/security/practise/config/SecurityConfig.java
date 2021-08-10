@@ -22,24 +22,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/").permitAll()
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/view/login").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-                .and()
-                .httpBasic();
+                .loginPage("/view/login");
+
     }
 
     @Bean
-    public PasswordEncoder encoderP(){
+    public PasswordEncoder encoderP() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
 
-    @Bean
-    public UserDetailsService abcs(){
+    /*@Bean
+    public UserDetailsService abcs() {
         UserDetails vvU = User.builder()
                 .username("vv")
                 .password("{noop}asas")
@@ -47,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .build();
 
         return new InMemoryUserDetailsManager(vvU);
-    }
+    }*/
 }
 
 
