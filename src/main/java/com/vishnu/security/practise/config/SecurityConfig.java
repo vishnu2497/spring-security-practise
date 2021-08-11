@@ -2,6 +2,7 @@ package com.vishnu.security.practise.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,7 +18,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
         auth.inMemoryAuthentication().withUser("vishnuram").password("{noop}vvv").roles("STUDENT");
+        auth.inMemoryAuthentication().withUser("abcd").password("{noop}abcd").roles("ADMIN");
     }
 
     @Override
@@ -53,6 +56,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         return new InMemoryUserDetailsManager(vvU);
     }*/
+//
+//    @Bean
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//        // ALTHOUGH THIS SEEMS LIKE USELESS CODE,
+//        // IT'S REQUIRED TO PREVENT SPRING BOOT AUTO-CONFIGURATION
+//        return super.authenticationManagerBean();
+//    }
 }
 
 
