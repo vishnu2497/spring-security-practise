@@ -13,4 +13,15 @@ public class ViewController {
     String test() {
         return "login";
     }
+
+    @GetMapping("/error")
+    String error() {
+        return "error";
+    }
+
+    @GetMapping("/noaccess")
+    String noaccess() {
+        return "noaccess";
+    }
+
 }
